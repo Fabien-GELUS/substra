@@ -54,9 +54,6 @@ Options:
                                   Enable logging and set log level
   --config PATH                   Config path (default ~/.substra).
   --profile TEXT                  Profile name to use.
-  --tokens FILE                   Tokens file path to use (default ~/.substra-
-                                  tokens).
-
   --verbose                       Enable verbose mode.
   -u, --username TEXT
   -p, --password TEXT
@@ -83,9 +80,6 @@ Options:
                                   Enable logging and set log level
   --config PATH                   Config path (default ~/.substra).
   --profile TEXT                  Profile name to use.
-  --tokens FILE                   Tokens file path to use (default ~/.substra-
-                                  tokens).
-
   --verbose                       Enable verbose mode.
   --help                          Show this message and exit.
 ```
@@ -125,9 +119,6 @@ Options:
                                   Enable logging and set log level
   --config PATH                   Config path (default ~/.substra).
   --profile TEXT                  Profile name to use.
-  --tokens FILE                   Tokens file path to use (default ~/.substra-
-                                  tokens).
-
   --verbose                       Enable verbose mode.
   --yaml                          Display output as yaml.
   --json                          Display output as json.
@@ -180,9 +171,6 @@ Options:
                                   Enable logging and set log level
   --config PATH                   Config path (default ~/.substra).
   --profile TEXT                  Profile name to use.
-  --tokens FILE                   Tokens file path to use (default ~/.substra-
-                                  tokens).
-
   --verbose                       Enable verbose mode.
   --yaml                          Display output as yaml.
   --json                          Display output as json.
@@ -221,9 +209,6 @@ Options:
                                   Enable logging and set log level
   --config PATH                   Config path (default ~/.substra).
   --profile TEXT                  Profile name to use.
-  --tokens FILE                   Tokens file path to use (default ~/.substra-
-                                  tokens).
-
   --verbose                       Enable verbose mode.
   --yaml                          Display output as yaml.
   --json                          Display output as json.
@@ -282,9 +267,6 @@ Options:
                                   Enable logging and set log level
   --config PATH                   Config path (default ~/.substra).
   --profile TEXT                  Profile name to use.
-  --tokens FILE                   Tokens file path to use (default ~/.substra-
-                                  tokens).
-
   --verbose                       Enable verbose mode.
   --yaml                          Display output as yaml.
   --json                          Display output as json.
@@ -323,9 +305,6 @@ Options:
                                   Enable logging and set log level
   --config PATH                   Config path (default ~/.substra).
   --profile TEXT                  Profile name to use.
-  --tokens FILE                   Tokens file path to use (default ~/.substra-
-                                  tokens).
-
   --verbose                       Enable verbose mode.
   --yaml                          Display output as yaml.
   --json                          Display output as json.
@@ -364,9 +343,6 @@ Options:
                                   Enable logging and set log level
   --config PATH                   Config path (default ~/.substra).
   --profile TEXT                  Profile name to use.
-  --tokens FILE                   Tokens file path to use (default ~/.substra-
-                                  tokens).
-
   --verbose                       Enable verbose mode.
   --yaml                          Display output as yaml.
   --json                          Display output as json.
@@ -401,9 +377,6 @@ Options:
                                   Enable logging and set log level
   --config PATH                   Config path (default ~/.substra).
   --profile TEXT                  Profile name to use.
-  --tokens FILE                   Tokens file path to use (default ~/.substra-
-                                  tokens).
-
   --verbose                       Enable verbose mode.
   --yaml                          Display output as yaml.
   --json                          Display output as json.
@@ -428,9 +401,6 @@ Options:
                                   Enable logging and set log level
   --config PATH                   Config path (default ~/.substra).
   --profile TEXT                  Profile name to use.
-  --tokens FILE                   Tokens file path to use (default ~/.substra-
-                                  tokens).
-
   --verbose                       Enable verbose mode.
   --yaml                          Display output as yaml.
   --json                          Display output as json.
@@ -475,9 +445,6 @@ Options:
                                   Enable logging and set log level
   --config PATH                   Config path (default ~/.substra).
   --profile TEXT                  Profile name to use.
-  --tokens FILE                   Tokens file path to use (default ~/.substra-
-                                  tokens).
-
   --verbose                       Enable verbose mode.
   --yaml                          Display output as yaml.
   --json                          Display output as json.
@@ -512,9 +479,6 @@ Options:
                                   Enable logging and set log level
   --config PATH                   Config path (default ~/.substra).
   --profile TEXT                  Profile name to use.
-  --tokens FILE                   Tokens file path to use (default ~/.substra-
-                                  tokens).
-
   --verbose                       Enable verbose mode.
   --yaml                          Display output as yaml.
   --json                          Display output as json.
@@ -537,9 +501,6 @@ Options:
                                   Enable logging and set log level
   --config PATH                   Config path (default ~/.substra).
   --profile TEXT                  Profile name to use.
-  --tokens FILE                   Tokens file path to use (default ~/.substra-
-                                  tokens).
-
   --verbose                       Enable verbose mode.
   --yaml                          Display output as yaml.
   --json                          Display output as json.
@@ -577,9 +538,6 @@ Options:
                                   Enable logging and set log level
   --config PATH                   Config path (default ~/.substra).
   --profile TEXT                  Profile name to use.
-  --tokens FILE                   Tokens file path to use (default ~/.substra-
-                                  tokens).
-
   --verbose                       Enable verbose mode.
   --yaml                          Display output as yaml.
   --json                          Display output as json.
@@ -601,9 +559,6 @@ Options:
                                   Enable logging and set log level
   --config PATH                   Config path (default ~/.substra).
   --profile TEXT                  Profile name to use.
-  --tokens FILE                   Tokens file path to use (default ~/.substra-
-                                  tokens).
-
   --verbose                       Enable verbose mode.
   --help                          Show this message and exit.
 ```
@@ -627,9 +582,6 @@ Options:
                                   Enable logging and set log level
   --config PATH                   Config path (default ~/.substra).
   --profile TEXT                  Profile name to use.
-  --tokens FILE                   Tokens file path to use (default ~/.substra-
-                                  tokens).
-
   --verbose                       Enable verbose mode.
   --help                          Show this message and exit.
 ```
@@ -650,9 +602,6 @@ Options:
                                   Enable logging and set log level
   --config PATH                   Config path (default ~/.substra).
   --profile TEXT                  Profile name to use.
-  --tokens FILE                   Tokens file path to use (default ~/.substra-
-                                  tokens).
-
   --verbose                       Enable verbose mode.
   --yaml                          Display output as yaml.
   --json                          Display output as json.
@@ -719,9 +668,6 @@ Options:
                                   Enable logging and set log level
   --config PATH                   Config path (default ~/.substra).
   --profile TEXT                  Profile name to use.
-  --tokens FILE                   Tokens file path to use (default ~/.substra-
-                                  tokens).
-
   --verbose                       Enable verbose mode.
   --yaml                          Display output as yaml.
   --json                          Display output as json.
@@ -752,9 +698,6 @@ Options:
                                   Enable logging and set log level
   --config PATH                   Config path (default ~/.substra).
   --profile TEXT                  Profile name to use.
-  --tokens FILE                   Tokens file path to use (default ~/.substra-
-                                  tokens).
-
   --verbose                       Enable verbose mode.
   --help                          Show this message and exit.
 ```
@@ -771,9 +714,6 @@ Options:
                                   Enable logging and set log level
   --config PATH                   Config path (default ~/.substra).
   --profile TEXT                  Profile name to use.
-  --tokens FILE                   Tokens file path to use (default ~/.substra-
-                                  tokens).
-
   --verbose                       Enable verbose mode.
   --help                          Show this message and exit.
 ```
@@ -829,9 +769,6 @@ Options:
                                   Enable logging and set log level
   --config PATH                   Config path (default ~/.substra).
   --profile TEXT                  Profile name to use.
-  --tokens FILE                   Tokens file path to use (default ~/.substra-
-                                  tokens).
-
   --verbose                       Enable verbose mode.
   --yaml                          Display output as yaml.
   --json                          Display output as json.

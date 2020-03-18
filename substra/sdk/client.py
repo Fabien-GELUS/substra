@@ -19,7 +19,7 @@ import os
 import time
 
 from substra.sdk import utils, assets, rest_client, exceptions
-from substra.sdk.config import ProfileConfigManager, ProfileTokenManager, ProfileNotFoundError
+from substra.sdk.config import ConfigManager, ProfileNotFoundError
 
 logger = logging.getLogger(__name__)
 
@@ -76,10 +76,8 @@ def _update_permissions_field(data, permissions_field='permissions'):
 
 
 class Client(object):
-    def __init__(self, config_path=None, profile_name=None, token_path=None,
-                 retry_timeout=DEFAULT_RETRY_TIMEOUT):
-        self._cfg_manager = ProfileConfigManager(config_path)
-        self._token_manager = ProfileTokenManager(token_path)
+    def __init__(self, config_path=None, profile_name=None, retry_timeout=DEFAULT_RETRY_TIMEOUT):
+        self._cfg_manager = ConfigManager(config_path)
         self.client = rest_client.Client()
         self._retry_timeout = retry_timeout
 
@@ -93,20 +91,13 @@ class Client(object):
 
     def use_profile(self, profile_name):
         """Set client current profile."""
-        cfg = {}
-        cfg.update(self._cfg_manager.get_profile(profile_name))
-        try:
-            cfg.update(self._token_manager.get_profile(profile_name))
-        except ProfileNotFoundError:
-            pass
+        cfg = self._cfg_manager.get_profile(profile_name)
         self.client.set_config(cfg)
         self._current_profile_name = profile_name
 
     def add_profile(self, profile_name, url, version='0.0', insecure=False, token=None):
         """Add new profile (in-memory only) and configure client to use it."""
-        self._cfg_manager.set_profile(profile_name, url, version, insecure)
-        if token:
-            self._token_manager.set_profile(profile_name, token)
+        self._cfg_manager.set_profile(profile_name, url, version, insecure, token)
         self.use_profile(profile_name)
 
     @logit
@@ -123,7 +114,7 @@ class Client(object):
         res = self.client.login(username, password)
         token = res.json()['token']
 
-        self._token_manager.set_profile(self._current_profile_name, token)
+        self._cfg_manager.set_token(self._current_profile_name, token)
         self.use_profile(self._current_profile_name)
 
         return token
