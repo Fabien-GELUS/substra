@@ -167,6 +167,16 @@ def click_global_conf_with_output_format(f):
     return f
 
 
+def click_option_metadata(f):
+    """Add metadata option to command."""
+    return click.option(
+        '--metadata-path',
+        'metadata',
+        callback=load_json_from_path,
+        type=click.Path(exists=True, resolve_path=True, dir_okay=False),
+        help='Metadata file path')(f)
+
+
 def click_option_expand(f):
     """Add expand option to command."""
     return click.option(
@@ -339,6 +349,7 @@ def add_dataset(ctx, data, objective_key):
             "public": bool,
             "authorized_ids": list[str],
         },
+        "metadata": dict
     }
 
     \b
@@ -354,6 +365,7 @@ def add_dataset(ctx, data, objective_key):
     client = get_client(ctx.obj)
     if objective_key:  # overwrite data values if set
         data['objective_key'] = objective_key
+
     res = client.add_dataset(data)
     printer = printers.get_asset_printer(assets.DATASET, ctx.obj.output_format)
     printer.print(res, is_list=False)
@@ -384,6 +396,7 @@ def add_objective(ctx, data, dataset_key, data_samples):
             "public": bool,
             "authorized_ids": list[str],
         },
+        "metadata": dict
     }
 
     \b
@@ -440,6 +453,7 @@ def add_algo(ctx, data):
             "public": bool,
             "authorized_ids": list[str],
         },
+        "metadata": dict
     }
 
     \b
@@ -450,6 +464,7 @@ def add_algo(ctx, data):
       script and its Dockerfile
     - permissions: define asset access permissions
     """
+
     client = get_client(ctx.obj)
     res = client.add_algo(data)
     printer = printers.get_asset_printer(assets.ALGO, ctx.obj.output_format)
@@ -502,7 +517,8 @@ def add_compute_plan(ctx, tuples):
             "test_data_sample_keys": list[str],
             "traintuple_id": str,
             "tag": str,
-        }]
+        }],
+        "metadata": list[str]
     }
 
     """
@@ -532,6 +548,7 @@ def add_aggregate_algo(ctx, data):
             "public": bool,
             "authorized_ids": list[str],
         },
+        "metadata": dict
     }
 
     \b
@@ -542,6 +559,7 @@ def add_aggregate_algo(ctx, data):
       script and its Dockerfile
     - permissions: define asset access permissions
     """
+
     client = get_client(ctx.obj)
     res = client.add_aggregate_algo(data)
     printer = printers.get_asset_printer(assets.AGGREGATE_ALGO, ctx.obj.output_format)
@@ -568,6 +586,7 @@ def add_composite_algo(ctx, data):
             "public": bool,
             "authorized_ids": list[str],
         },
+        "metadata": dict
     }
 
     \b
@@ -578,6 +597,7 @@ def add_composite_algo(ctx, data):
       script and its Dockerfile
     - permissions: define asset access permissions
     """
+
     client = get_client(ctx.obj)
     res = client.add_composite_algo(data)
     printer = printers.get_asset_printer(assets.COMPOSITE_ALGO, ctx.obj.output_format)
@@ -594,9 +614,10 @@ def add_composite_algo(ctx, data):
               help='In model traintuple key.')
 @click.option('--tag')
 @click_global_conf_with_output_format
+@click_option_metadata
 @click.pass_context
 @error_printer
-def add_traintuple(ctx, algo_key, dataset_key, data_samples, in_models_keys, tag):
+def add_traintuple(ctx, algo_key, dataset_key, data_samples, in_models_keys, tag, metadata):
     """Add traintuple.
 
     The option --data-samples-path must point to a valid JSON file with the
@@ -623,6 +644,9 @@ def add_traintuple(ctx, algo_key, dataset_key, data_samples, in_models_keys, tag
     if tag:
         data['tag'] = tag
 
+    if metadata:
+        data['metadata'] = metadata
+
     if in_models_keys:
         data['in_models_keys'] = in_models_keys
     res = client.add_traintuple(data)
@@ -638,9 +662,10 @@ def add_traintuple(ctx, algo_key, dataset_key, data_samples, in_models_keys, tag
 @click.option('--rank', type=click.INT)
 @click.option('--tag')
 @click_global_conf_with_output_format
+@click_option_metadata
 @click.pass_context
 @error_printer
-def add_aggregatetuple(ctx, algo_key, in_models_keys, worker, rank, tag):
+def add_aggregatetuple(ctx, algo_key, in_models_keys, worker, rank, tag, metadata):
     """Add aggregatetuple."""
     client = get_client(ctx.obj)
     data = {
@@ -656,6 +681,9 @@ def add_aggregatetuple(ctx, algo_key, in_models_keys, worker, rank, tag):
 
     if tag:
         data['tag'] = tag
+
+    if metadata:
+        data['metadata'] = metadata
     res = client.add_aggregatetuple(data)
     printer = printers.get_asset_printer(assets.AGGREGATETUPLE, ctx.obj.output_format)
     printer.print(res, is_list=False)
@@ -677,10 +705,11 @@ def add_aggregatetuple(ctx, algo_key, in_models_keys, worker, rank, tag):
               help='Load a permissions file.')
 @click.option('--tag')
 @click_global_conf_with_output_format
+@click_option_metadata
 @click.pass_context
 @error_printer
 def add_composite_traintuple(ctx, algo_key, dataset_key, data_samples, head_model_key,
-                             trunk_model_key, out_trunk_model_permissions, tag):
+                             trunk_model_key, out_trunk_model_permissions, tag, metadata):
     """Add composite traintuple.
 
     The option --data-samples-path must point to a valid JSON file with the
@@ -729,6 +758,9 @@ def add_composite_traintuple(ctx, algo_key, dataset_key, data_samples, head_mode
 
     if tag:
         data['tag'] = tag
+
+    if metadata:
+        data['metadata'] = metadata
     res = client.add_composite_traintuple(data)
     printer = printers.get_asset_printer(assets.COMPOSITE_TRAINTUPLE, ctx.obj.output_format)
     printer.print(res, is_list=False)
@@ -743,9 +775,10 @@ def add_composite_traintuple(ctx, algo_key, dataset_key, data_samples, head_mode
               callback=load_json_from_path)
 @click.option('--tag')
 @click_global_conf_with_output_format
+@click_option_metadata
 @click.pass_context
 @error_printer
-def add_testtuple(ctx, objective_key, dataset_key, traintuple_key, data_samples, tag):
+def add_testtuple(ctx, objective_key, dataset_key, traintuple_key, data_samples, tag, metadata):
     """Add testtuple.
 
     The option --data-samples-path must point to a valid JSON file with the
@@ -772,6 +805,9 @@ def add_testtuple(ctx, objective_key, dataset_key, traintuple_key, data_samples,
 
     if tag:
         data['tag'] = tag
+
+    if metadata:
+        data['metadata'] = metadata
     res = client.add_testtuple(data)
     printer = printers.get_asset_printer(assets.TESTTUPLE, ctx.obj.output_format)
     printer.print(res, is_list=False)
