@@ -44,16 +44,20 @@ def progress_bar(length):
 
 
 current_directory = os.path.dirname(__file__)
-assets_directory = os.path.join(current_directory, '../assets')
+assets_directory = os.path.join(current_directory, '../assets/node_1')
 
 client = substra.Client(profile_name="node-1")
 client.login()
 
 DATASET = {
-    'name': 'Titanic',
+    'name': 'Titanic - Node 1',
     'type': 'csv',
     'data_opener': os.path.join(assets_directory, 'dataset/opener.py'),
     'description': os.path.join(assets_directory, 'dataset/description.md'),
+    'permissions': {
+        'public': True,
+        'authorized_ids': [],
+    },
 }
 
 TEST_DATA_SAMPLES_PATHS = [
@@ -71,6 +75,10 @@ OBJECTIVE = {
     'description': os.path.join(assets_directory, 'objective/description.md'),
     'metrics_name': 'accuracy',
     'metrics': os.path.join(assets_directory, 'objective/metrics.zip'),
+    'permissions': {
+        'public': True,
+        'authorized_ids': [],
+    },
 }
 METRICS_DOCKERFILE_FILES = [
     os.path.join(assets_directory, 'objective/metrics.py'),
@@ -145,6 +153,6 @@ assets_keys = {
 }
 assets_keys_path = os.path.join(current_directory, '../assets_keys.json')
 with open(assets_keys_path, 'w') as f:
-    json.dump(assets_keys, f, indent=2)
+    json.dump({'node_1': assets_keys}, f, indent=2)
 
-print(f'Assets keys have been saved to {os.path.abspath(assets_keys_path)}')
+print(f'Node 1 assets keys have been saved to {os.path.abspath(assets_keys_path)}')
