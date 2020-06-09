@@ -50,24 +50,22 @@ client = substra.Client(profile_name="node-1")
 client.login()
 
 DATASET = {
-    'name': 'Titanic',
-    'type': 'csv',
+    'name': 'Mnist',
+    'type': 'npy',
     'data_opener': os.path.join(assets_directory, 'dataset/opener.py'),
     'description': os.path.join(assets_directory, 'dataset/description.md'),
 }
 
 TEST_DATA_SAMPLES_PATHS = [
-    os.path.join(assets_directory, 'test_data_samples', path)
-    for path in os.listdir(os.path.join(assets_directory, 'test_data_samples'))
+    os.path.join(assets_directory, 'test_data')
 ]
 
 TRAIN_DATA_SAMPLES_PATHS = [
-    os.path.join(assets_directory, 'train_data_samples', path)
-    for path in os.listdir(os.path.join(assets_directory, 'train_data_samples'))
+    os.path.join(assets_directory, 'train_data')
 ]
 
 OBJECTIVE = {
-    'name': 'Titanic: Machine Learning From Disaster',
+    'name': 'Mnist: Digit Recognizer',
     'description': os.path.join(assets_directory, 'objective/description.md'),
     'metrics_name': 'accuracy',
     'metrics': os.path.join(assets_directory, 'objective/metrics.zip'),

@@ -31,7 +31,7 @@ data_path = os.path.join(root_path, '../data')
 
 #TODO : copy paste files into os.path.join(asset_path, 'train_data_samples') and os.path.join(asset_path, 'test_data_samples')
 # train / test split
-##train_data, test_data = train_test_split(data, test_size=0.2)
+train_data, test_data = train_test_split(data, test_size=0.2)
 
 # number of data samples for the train and test sets
 N_TRAIN_DATA_SAMPLES = 10
