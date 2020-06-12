@@ -1,74 +1,60 @@
+import substratools as tools
 import os
-import pandas as pd
-import random
-import string
+import glob
 import numpy as np
 
-import substratools as tools
+class MnistOpener(tools.Opener):
 
+    @classmethod
+    def _get_files(cls, folders):
+        """Return list of X and y file given a folder location"""
+        X_files, y_files = [], []
+        for folder in folders:
+            Xs = glob.glob(os.path.join(folder, 'x*.npy'))
+            ys = glob.glob(os.path.join(folder, 'y*.npy'))
 
-class TitanicOpener(tools.Opener):
+            X_files.extend(Xs)
+            y_files.extend(ys)
+
+        return X_files, y_files
+
     def get_X(self, folders):
-        data = self._get_data(folders)
-        return self._get_X(data)
+        """Get X :-) """
+        print('Finding features file...')
+        X_files, _ = self._get_files(folders)
+        print(X_files)
+        print('Loading features...')
+        Xs = []
+        for X_file in X_files:
+            Xs.append(np.load(X_file))
+        Xs = np.concatenate(Xs)
+
+        return Xs
 
     def get_y(self, folders):
-        data = self._get_data(folders)
-        return self._get_y(data)
+        """Get y :-)"""
+        print('Finding label file...')
+        _, y_files = self._get_files(folders)
 
+        print('Loading labels...')
+        ys = []
+        for y_file in y_files:
+            ys.append(np.load(y_file))
+        ys = np.concatenate(ys)
+
+        return ys
+    
     def save_predictions(self, y_pred, path):
-        with open(path, 'w') as f:
-            y_pred.to_csv(f, index=False)
+        """Save prediction"""
+        np.save(path, y_pred)
 
     def get_predictions(self, path):
-        return pd.read_csv(path)
+        """Get predictions which were saved using the save_pred function"""
+        return np.load(path)
 
     def fake_X(self):
-        data = self._fake_data()
-        return self._get_X(data)
+        return np.random.randn(22, 28, 28).astype(np.float32)
 
     def fake_y(self):
-        data = self._fake_data()
-        return self._get_y(data)
+        return np.random.choice(np.arange(10), size=(22)).astype(np.int)
 
-    @classmethod
-    def _get_X(cls, data):
-        return data.drop(columns=['Survived'])
-
-    @classmethod
-    def _get_y(cls, data):
-        return pd.DataFrame(data=data.get('Survived'), columns=['Survived'])
-
-    @classmethod
-    def _fake_data(cls):
-        N_SAMPLES = 100
-
-        data = {
-            'PassengerId': list(range(N_SAMPLES)),
-            'Survived': [random.choice([True, False]) for k in range(N_SAMPLES)],
-            'Pclass': [random.choice([1, 2, 3]) for k in range(N_SAMPLES)],
-            'Name': ["".join(random.sample(string.ascii_letters, 10)) for k in range(N_SAMPLES)],
-            'Sex': [random.choice(['male', 'female']) for k in range(N_SAMPLES)],
-            'Age': [random.choice(range(7, 77)) for k in range(N_SAMPLES)],
-            'SibSp': [random.choice(range(4)) for k in range(N_SAMPLES)],
-            'Parch': [random.choice(range(4)) for k in range(N_SAMPLES)],
-            'Ticket': ["".join(random.sample(string.ascii_letters, 10)) for k in range(N_SAMPLES)],
-            'Fare': [random.choice(np.arange(15, 150, 0.01)) for k in range(N_SAMPLES)],
-            'Cabin': ["".join(random.sample(string.ascii_letters, 3)) for k in range(N_SAMPLES)],
-            'Embarked': [random.choice(['C', 'S', 'Q']) for k in range(N_SAMPLES)],
-        }
-        return pd.DataFrame(data)
-
-    @classmethod
-    def _get_data(cls, folders):
-        # find csv files
-        paths = []
-        for folder in folders:
-            paths += [os.path.join(folder, f) for f in os.listdir(folder) if f[-4:] == '.csv']
-
-        # load data
-        data = pd.DataFrame()
-        for path in paths:
-            data = data.append(pd.read_csv(path))
-
-        return data
