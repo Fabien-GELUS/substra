@@ -6,10 +6,10 @@ import substratools as tools
 
 
 def constant_clf(X):
-    return pd.DataFrame(columns=['Survived'], data=np.zeros(len(X)), dtype=np.int64)
+    return pd.DataFrame(data=np.zeros(len(X)), dtype=np.int64) #TODO : test output
 
 
-class TitanicAlgo(tools.algo.Algo):
+class MnistAlgo(tools.algo.Algo):
     def train(self, X, y, models, rank):
         return constant_clf
 
@@ -25,4 +25,4 @@ class TitanicAlgo(tools.algo.Algo):
 
 
 if __name__ == '__main__':
-    tools.algo.execute(TitanicAlgo())
+    tools.algo.execute(MnistAlgo())
