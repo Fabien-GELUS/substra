@@ -24,22 +24,22 @@ assets_directory = os.path.join(current_directory, '../assets')
 client = substra.Client(profile_name="node-1")
 client.login()
 
-ALGO_KEYS_JSON_FILENAME = 'algo_random_forest_keys.json'
+ALGO_KEYS_JSON_FILENAME = 'algo_cnn_keys.json'
 
 ALGO = {
-    'name': 'Titanic: Random Forest',
-    'description': os.path.join(assets_directory, 'algo_random_forest/description.md')
+    'name': 'Mnist: CNN',
+    'description': os.path.join(assets_directory, 'algo_cnn/description.md')
 }
 ALGO_DOCKERFILE_FILES = [
-        os.path.join(assets_directory, 'algo_random_forest/algo.py'),
-        os.path.join(assets_directory, 'algo_random_forest/Dockerfile'),
+        os.path.join(assets_directory, 'algo_cnn/algo.py'),
+        os.path.join(assets_directory, 'algo_cnn/Dockerfile'),
 ]
 
 ########################################################
 #       Build archive
 ########################################################
 
-archive_path = os.path.join(current_directory, 'algo_random_forest.zip')
+archive_path = os.path.join(current_directory, 'algo_cnn.zip')
 with zipfile.ZipFile(archive_path, 'w') as z:
     for filepath in ALGO_DOCKERFILE_FILES:
         z.write(filepath, arcname=os.path.basename(filepath))
@@ -92,7 +92,7 @@ assert testtuple_key, 'Missing testtuple key'
 #         Save keys in json
 ########################################################
 
-assets_keys['algo_random_forest'] = {
+assets_keys['algo_cnn'] = {
     'algo_key': algo_key,
     'traintuple_key': traintuple_key,
     'testtuple_key': testtuple_key,
