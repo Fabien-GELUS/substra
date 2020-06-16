@@ -3,7 +3,7 @@ from sklearn.metrics import accuracy_score
 import substratools as tools
 
 
-class TitanicMetrics(tools.Metrics):
+class MnistMetrics(tools.Metrics):
     def score(self, y_true, y_pred):
         """Returns the macro-average recall
 
@@ -16,5 +16,6 @@ class TitanicMetrics(tools.Metrics):
         return accuracy_score(y_true, y_pred)
 
 
+
 if __name__ == '__main__':
-    tools.metrics.execute(TitanicMetrics())
+    tools.metrics.execute(MnistMetrics())

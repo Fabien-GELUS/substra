@@ -14,55 +14,37 @@
 
 """
 Script to generate data to be registered to Substra
-Titanic example
+Mnist example
 """
 
 import os
+import keras
+from keras.datasets import mnist
+import numpy as np
 
-import pandas as pd
-from sklearn.model_selection import KFold, train_test_split
+# Import dataset
 
-root_path = os.path.dirname(__file__)
-asset_path = os.path.join(root_path, '../assets')
+# the data, split between train and test sets
+(x_train, y_train), (x_test, y_test) = mnist.load_data()
+# train features, train labels, test features, test labels
+root_path = os.path.expanduser("~/python-projects/substra/substra/examples/mnist")
+data_path = os.path.join(root_path, 'data')
+train_data_path = os.path.join(data_path, 'train')
+test_data_path = os.path.join(data_path, 'test')
+assets_path = os.path.join(root_path, 'assets')
 
+print(data_path)
+print(assets_path)
 
-##data = pd.read_csv(os.path.join(root_path, '../data/train.csv'))
-data_path = os.path.join(root_path, '../data')
+OUT_FILE = {
+    os.path.join("train_data","x_train.npy"): x_train,
+    os.path.join("train_data","y_train.npy"): y_train,
+    os.path.join("test_data", "x_test.npy"): x_test,
+    os.path.join("test_data", "y_test.npy"): y_test,
 
-#TODO : copy paste files into os.path.join(asset_path, 'train_data_samples') and os.path.join(asset_path, 'test_data_samples')
-# train / test split
-train_data, test_data = train_test_split(data, test_size=0.2)
+}
 
-# number of data samples for the train and test sets
-N_TRAIN_DATA_SAMPLES = 10
-N_TEST_DATA_SAMPLES = 2
-
-train_test_configs = [
-    {
-        'data': train_data,
-        'n_samples': N_TRAIN_DATA_SAMPLES,
-        'data_samples_root': os.path.join(asset_path, 'train_data_samples'),
-        'data_samples_content': [],
-    },
-    {
-        'data': test_data,
-        'n_samples': N_TEST_DATA_SAMPLES,
-        'data_samples_root': os.path.join(asset_path, 'test_data_samples'),
-        'data_samples_content': [],
-    },
-]
-
-# generate data samples
-for conf in train_test_configs:
-    kf = KFold(n_splits=conf['n_samples'], shuffle=True)
-    splits = kf.split(conf['data'])
-    for _, index in splits:
-        conf['data_samples_content'].append(conf['data'].iloc[index])
-
-# save data samples
-for conf in train_test_configs:
-    for i, data_sample in enumerate(conf['data_samples_content']):
-        filename = os.path.join(conf['data_samples_root'], f'data_sample_{i}/data_sample_{i}.csv')
-        os.makedirs(os.path.dirname(filename), exist_ok=True)
-        with open(filename, 'w') as f:
-            data_sample.to_csv(f)
+for filename, data in OUT_FILE.items():
+    full_path = os.path.join(assets_path,filename)
+    os.makedirs(os.path.dirname(full_path), exist_ok=True)
+    np.save(full_path, data)
