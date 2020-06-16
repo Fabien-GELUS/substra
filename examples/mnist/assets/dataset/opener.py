@@ -50,6 +50,8 @@ class MnistOpener(tools.Opener):
     def save_predictions(self, y_pred, path):
         """Save prediction"""
         np.save(path, y_pred)
+        if os.path.splitext(path)[1]!=".npy":
+        	os.rename(path+".npy", path)
 
     def get_predictions(self, path):
         """Get predictions which were saved using the save_pred function"""
