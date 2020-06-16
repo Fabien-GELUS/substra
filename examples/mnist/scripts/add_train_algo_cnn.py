@@ -28,7 +28,11 @@ ALGO_KEYS_JSON_FILENAME = 'algo_cnn_keys.json'
 
 ALGO = {
     'name': 'Mnist: CNN',
-    'description': os.path.join(assets_directory, 'algo_cnn/description.md')
+    'description': os.path.join(assets_directory, 'algo_cnn/description.md'),
+    'permissions': {
+        'public': False,
+        'authorized_ids': []
+    },
 }
 ALGO_DOCKERFILE_FILES = [
         os.path.join(assets_directory, 'algo_cnn/algo.py'),
@@ -62,6 +66,7 @@ algo_key = client.add_algo({
     'name': ALGO['name'],
     'file': ALGO['file'],
     'description': ALGO['description'],
+    'permissions': ALGO['permissions'],
 }, exist_ok=True)['pkhash']
 
 ########################################################
