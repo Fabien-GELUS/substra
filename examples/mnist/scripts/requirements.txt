@@ -1,5 +1,5 @@
-tqdm
-sklearn
-pandas
-keras
-tensorflow
+tqdm==4.46.1
+sklearn==0.0
+pandas==1.0.4
+Keras==2.3.1
+tensorflow==2.2.0
