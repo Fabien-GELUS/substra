@@ -12,11 +12,11 @@ class MnistOpener(tools.Opener):
 
         for folder in folders:
 
-            Xs = glob.glob(os.path.join(folder, 'x*.npy'))
-            ys = glob.glob(os.path.join(folder, 'y*.npy'))
+            X_files_current = glob.glob(os.path.join(folder, 'x*.npy'))
+            y_files_current = glob.glob(os.path.join(folder, 'y*.npy'))
 
-            X_files.extend(Xs)
-            y_files.extend(ys)
+            X_files.extend(X_files_current)
+            y_files.extend(y_files_current)
 
         return X_files, y_files
 
