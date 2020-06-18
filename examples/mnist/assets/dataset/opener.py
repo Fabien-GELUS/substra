@@ -27,12 +27,13 @@ class MnistOpener(tools.Opener):
         X_files, _ = self._get_files(folders)
 
         print("Loading features...")
-        Xs = []
+        X = []
         for X_file in X_files:
             Xs.append(np.load(X_file))
-        Xs = np.concatenate(Xs)
+            X.append(np.load(X_file))
+        X = np.concatenate(X)
 
-        return Xs
+        return X
 
     def get_y(self, folders):
         """Get y :-)"""
@@ -40,12 +41,12 @@ class MnistOpener(tools.Opener):
         _, y_files = self._get_files(folders)
 
         print("Loading labels...")
-        ys = []
+        y = []
         for y_file in y_files:
-            ys.append(np.load(y_file))
-        ys = np.concatenate(ys)
+            y.append(np.load(y_file))
+        y = np.concatenate(y)
 
-        return ys
+        return y 
 
     def save_predictions(self, y_pred, path):
         """Save prediction"""
