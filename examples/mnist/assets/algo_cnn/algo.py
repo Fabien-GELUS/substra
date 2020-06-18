@@ -27,8 +27,8 @@ class Algo(tools.algo.Algo):
 
         X /= 255
 
-        print("X shape:", X.shape)
-        print(X.shape[0], " samples")
+        print(f"X shape: {X.shape}")
+        print(f"{X.shape[0]} samples")
 
         return X
 
