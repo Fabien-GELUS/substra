@@ -51,7 +51,7 @@ the train and predict tasks but also a lot of data preprocessing.
 
 ```sh
 
-python3 assets/algo_cnn/algo.py train \
+python assets/algo_cnn/algo.py train \
   --debug \
   --opener-path assets/dataset/opener.py \
   --data-samples-path assets/train_data \
@@ -59,7 +59,7 @@ python3 assets/algo_cnn/algo.py train \
   --log-path assets/logs/train.log
 
 
-python3 assets/algo_cnn/algo.py predict \
+python assets/algo_cnn/algo.py predict \
   --debug \
   --opener-path assets/dataset/opener.py \
   --data-samples-path assets/train_data \
@@ -68,7 +68,7 @@ python3 assets/algo_cnn/algo.py predict \
   --log-path assets/logs/train_predict.log \
   model
 
-python3 assets/objective/metrics.py \
+python assets/objective/metrics.py \
   --debug \
   --opener-path assets/dataset/opener.py \
   --data-samples-path assets/train_data \
@@ -82,7 +82,7 @@ python3 assets/objective/metrics.py \
 
 ```sh
 
-python3 assets/algo_cnn/algo.py predict \
+python assets/algo_cnn/algo.py predict \
   --debug \
   --opener-path assets/dataset/opener.py \
   --data-samples-path assets/test_data \
@@ -91,7 +91,7 @@ python3 assets/algo_cnn/algo.py predict \
   --log-path assets/logs/test_predict.log \
   model
   
-python3 assets/objective/metrics.py \
+python assets/objective/metrics.py \
   --debug \
   --opener-path assets/dataset/opener.py \
   --data-samples-path assets/test_data \
