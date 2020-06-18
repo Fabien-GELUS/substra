@@ -38,8 +38,6 @@ class Algo(tools.algo.Algo):
         num_classes = 10
         y = keras.utils.to_categorical(y, num_classes)
         
-
-
         model = Sequential()
         model.add(Conv2D(32, kernel_size=(3, 3),
                         activation='relu',
@@ -69,7 +67,6 @@ class Algo(tools.algo.Algo):
                 # validation_data=(x_test, y_test)
                 )
         
-
         return model
 
     def predict(self, X, model):
@@ -85,7 +82,6 @@ class Algo(tools.algo.Algo):
         os.makedirs(os.path.dirname(path), exist_ok=True)
         with open(path, 'wb') as f:
             model.save(f)
-
 
 if __name__ == '__main__':
     tools.algo.execute(Algo())
