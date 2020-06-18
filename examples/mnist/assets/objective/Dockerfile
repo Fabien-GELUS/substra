@@ -2,7 +2,7 @@
 FROM substrafoundation/substra-tools:0.5.0
 
 # install dependencies
-RUN pip3 install sklearn==0.0
+RUN pip3 install scikit-learn==0.23.1
 
 # add your metrics script to docker image
 ADD metrics.py .
