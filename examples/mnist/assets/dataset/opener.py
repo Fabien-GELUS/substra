@@ -3,8 +3,8 @@ import os
 import glob
 import numpy as np
 
-class MnistOpener(tools.Opener):
 
+class MnistOpener(tools.Opener):
     @classmethod
     def _get_files(cls, folders):
         """Return list of X and y file given a folder location"""
@@ -12,8 +12,8 @@ class MnistOpener(tools.Opener):
 
         for folder in folders:
 
-            X_files_current = glob.glob(os.path.join(folder, 'x*.npy'))
-            y_files_current = glob.glob(os.path.join(folder, 'y*.npy'))
+            X_files_current = glob.glob(os.path.join(folder, "x*.npy"))
+            y_files_current = glob.glob(os.path.join(folder, "y*.npy"))
 
             X_files.extend(X_files_current)
             y_files.extend(y_files_current)
@@ -23,10 +23,10 @@ class MnistOpener(tools.Opener):
     def get_X(self, folders):
         """Get X :-) """
 
-        print('Finding features file...')
+        print("Finding features file...")
         X_files, _ = self._get_files(folders)
 
-        print('Loading features...')
+        print("Loading features...")
         Xs = []
         for X_file in X_files:
             Xs.append(np.load(X_file))
@@ -36,22 +36,22 @@ class MnistOpener(tools.Opener):
 
     def get_y(self, folders):
         """Get y :-)"""
-        print('Finding label file...')
+        print("Finding label file...")
         _, y_files = self._get_files(folders)
 
-        print('Loading labels...')
+        print("Loading labels...")
         ys = []
         for y_file in y_files:
             ys.append(np.load(y_file))
         ys = np.concatenate(ys)
 
         return ys
-    
+
     def save_predictions(self, y_pred, path):
         """Save prediction"""
         np.save(path, y_pred)
-        if os.path.splitext(path)[1]!=".npy":
-        	os.rename(path+".npy", path)
+        if os.path.splitext(path)[1] != ".npy":
+            os.rename(path + ".npy", path)
 
     def get_predictions(self, path):
         """Get predictions which were saved using the save_pred function"""
@@ -62,4 +62,3 @@ class MnistOpener(tools.Opener):
 
     def fake_y(self):
         return np.random.choice(np.arange(10), size=(22)).astype(np.int)
-
