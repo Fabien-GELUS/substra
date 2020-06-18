@@ -100,5 +100,66 @@ python3 assets/objective/metrics.py \
   --log-path assets/logs/test_metrics.log
 ```
 
-### Using substra cli (wip)
+### Using substra cli
+
+Before pushing our assets to the platform, we need to make sure they work well. To do so, we can run them locally. This
+way, if the training fails, we can access the logs and debug our code.
+
+To test the assets, we'll use `substra run-local`, passing it paths to our algorithm of course, but also the opener,
+the metrics and to the data samples we want to use.
+
+```sh
+substra run-local assets/algo_cnn \
+  --train-opener=assets/dataset/opener.py \
+  --test-opener=assets/dataset/opener.py \
+  --metrics=assets/objective/ \
+  --train-data-samples=assets/train_data \
+  --test-data-samples=assets/test_data
+```
+
+At the end of this step, you'll find in the newly created `sandbox/model` folder a `model` file that contains your
+trained model. There is also a `sandbox/pred_train` folder that contains both the predictions made by the model on
+train data and the associated performance.
+
+#### Debugging
+
+It's more than probable that your code won't run perfectly the first time. Since runs happen in dockers, you can't
+debug using prints. Instead, you should use the `logging` module from python. All logs can then be consulted at the end
+of the run in  `sandbox/model/log_model.log`.
+
+## Adding the assets to substra
+
+### Adding the objective, dataset and data samples to substra
+
+A script has been written that adds objective, data manager and data samples to substra. It uses the `substra` python
+sdk to perform actions. It's main goal is to create assets, get their keys and use these keys in the creation of other
+assets.
+
+To run it:
+
+```sh
+pip install -r scripts/requirements.txt
+python scripts/add_dataset_objective.py
+```
+
+This script just generated an `assets_keys.json` file in the `mnist` folder. This file contains the keys of all assets
+we've just created and organizes the keys of the train data samples in folds. This file will be used as input when
+adding an algorithm so that we can automatically launch all training and testing tasks.
+
+
+### Adding the algorithm and training it
+
+The script `add_train_algo_cnn.py` pushes our simple algo to substra and then uses the `assets_keys.json` file
+we just generated to train it against the dataset and objective we previously set up. It will then update the
+`assets_keys.json` file with the newly created assets keys (algo, traintuple and testtuple)
+
+To run it:
+
+```sh
+python scripts/add_train_algo_cnn.py
+```
+
+It will end by providing a couple of commands you can use to track the progress of the train and test tuples as well
+as the associated scores. Alternatively, you can browse the frontend to look up progress and scores.
+
 
