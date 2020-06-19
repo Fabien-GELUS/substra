@@ -44,9 +44,16 @@ DATASET = {
     "permissions": {"public": False, "authorized_ids": []},
 }
 
-TEST_DATA_SAMPLES_PATHS = [os.path.join(assets_directory, "test_data")]
+TEST_DATA_SAMPLES_PATHS = [
+    os.path.join(assets_directory, 'test_data', path)
+    for path in os.listdir(os.path.join(assets_directory, 'test_data'))
+]
 
-TRAIN_DATA_SAMPLES_PATHS = [os.path.join(assets_directory, "train_data")]
+TRAIN_DATA_SAMPLES_PATHS = [
+    os.path.join(assets_directory, 'train_data', path)
+    for path in os.listdir(os.path.join(assets_directory, 'train_data'))
+]
+
 
 OBJECTIVE = {
     "name": "Mnist: Digit Recognizer",
