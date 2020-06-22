@@ -9,7 +9,7 @@ from keras.layers import Conv2D, MaxPooling2D
 # input image dimensions
 img_rows, img_cols = 28, 28
 input_shape = (img_rows, img_cols, 1)
-
+num_classes = 10
 
 class Algo(tools.algo.Algo):
     def _normalize_X(self, X):
@@ -32,10 +32,7 @@ class Algo(tools.algo.Algo):
 
         return X
 
-    def train(self, X, y, models, rank):
-        X = self._normalize_X(X)
-        num_classes = 10
-        y = keras.utils.to_categorical(y, num_classes)
+    def _init_new_model(self):
 
         model = Sequential()
         model.add(
@@ -55,19 +52,22 @@ class Algo(tools.algo.Algo):
             metrics=["accuracy"],
         )
 
-        epochs = 1
-        batch_size = 128
+        return model
+
+    def train(self, X, y, models, rank):
+        X = self._normalize_X(X)
+
         # convert class vectors to binary class matrices
-        # TODO in metrics
-        # y_test = keras.utils.to_categorical(y_test, num_classes)
+        y = keras.utils.to_categorical(y, num_classes)
+
+        model = self._init_new_model()
 
         model.fit(
             X,
             y,
-            batch_size=batch_size,
-            epochs=epochs,
+            batch_size=128,
+            epochs=1,
             verbose=1,
-            # validation_data=(x_test, y_test)
         )
 
         return model
