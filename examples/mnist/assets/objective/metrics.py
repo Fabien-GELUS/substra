@@ -9,7 +9,7 @@ class MnistMetrics(tools.Metrics):
 
         :param y_true: actual values from test data
         :type y_true: pd.DataFrame
-        :param y_true: predicted values from test data
+        :param y_pred: predicted values from test data
         :type y_pred: pd.DataFrame
         :rtype: float
         """
