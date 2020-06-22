@@ -29,7 +29,6 @@ class MnistOpener(tools.Opener):
         print("Loading features...")
         X = []
         for X_file in X_files:
-            Xs.append(np.load(X_file))
             X.append(np.load(X_file))
         X = np.concatenate(X)
 
