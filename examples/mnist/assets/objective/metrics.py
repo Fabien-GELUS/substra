@@ -8,9 +8,9 @@ class MnistMetrics(tools.Metrics):
         """Returns the macro-average recall
 
         :param y_true: actual values from test data
-        :type y_true: pd.DataFrame
+        :type y_true: array_like
         :param y_pred: predicted values from test data
-        :type y_pred: pd.DataFrame
+        :type y_pred: array_like
         :rtype: float
         """
         return accuracy_score(y_true, y_pred)
