@@ -15,5 +15,5 @@ Numpy array files with the following shape : (\[nb_samples\], 28, 28) for the fe
 The opener exposes 4 methods:
 * `get_X` returns all features data
 * `get_y` returns all labels data
-* `save_pred` saves a pandas DataFrame as npy,
-* `get_pred` loads the npy saved with `save_pred` and returns a pandas DataFrame
+* `save_pred` saves a Numpy array as npy,
+* `get_pred` loads the npy saved with `save_pred` and returns a Numpy array
